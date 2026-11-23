@@ -6,6 +6,7 @@ services:
       - "${PORT:-18242}:8000"
     environment:
       DB_PATH: /data/workbench.sqlite
+      COBRAND_DB: /data/cobrand.sqlite
       TZ: Asia/Shanghai
     volumes:
       - workspace:/data

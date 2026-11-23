@@ -1,0 +1,26 @@
+{
+  "partners": {"brand": "品牌方", "mall": "商场方"},
+  "events": [
+    {"id": "B1", "type": "BUDGET", "pool": "brand", "budget": 500, "at": "2026-11-01T00:00:00+08:00"},
+    {"id": "B2", "type": "BUDGET", "pool": "mall", "budget": 25, "at": "2026-11-01T00:00:00+08:00"},
+
+    {"id": "I1", "type": "ISSUE", "member": "M001", "points": 100, "shares": {"brand": 70, "mall": 30}, "at": "2026-11-02T09:00:00+08:00"},
+    {"id": "I2", "type": "ISSUE", "member": "M002", "points": 50, "shares": {"brand": 30, "mall": 20}, "at": "2026-11-02T10:00:00+08:00"},
+
+    {"id": "S1", "type": "SPEND", "member": "M001", "points": 70, "at": "2026-11-05T14:00:00+08:00"},
+    {"id": "R1", "type": "REFUND", "member": "M001", "points": 30, "ref": "S1", "at": "2026-11-06T11:00:00+08:00"},
+    {"id": "S2", "type": "SPEND", "member": "M001", "points": 50, "at": "2026-11-08T15:00:00+08:00"},
+
+    {"id": "S3", "type": "SPEND", "member": "M002", "points": 50, "at": "2026-11-07T16:00:00+08:00"},
+    {"id": "R2", "type": "REFUND", "member": "M002", "points": 10, "ref": "S3", "at": "2026-11-09T10:30:00+08:00"},
+
+    {"id": "BAD1", "type": "SPEND", "member": "M001", "points": 999, "at": "2026-11-08T20:00:00+08:00"},
+    {"id": "BAD2", "type": "REFUND", "member": "M001", "points": 999, "ref": "S1", "at": "2026-11-09T20:00:00+08:00"},
+    {"id": "BAD3", "type": "REFUND", "member": "M001", "points": 5, "ref": "S3", "at": "2026-11-09T21:00:00+08:00"},
+    {"id": "S4", "type": "SPEND", "member": "M001", "points": 40, "at": "2026-11-10T10:00:00+08:00"},
+    {"id": "BAD4", "type": "ISSUE", "member": "M003", "points": 20, "shares": {"brand": 12, "mall": 5}, "at": "2026-11-10T11:00:00+08:00"},
+    {"id": "B1", "type": "ISSUE", "member": "M003", "points": 10, "shares": {"brand": 10, "mall": 0}, "at": "2026-11-10T12:00:00+08:00"},
+    {"id": "R1", "type": "REFUND", "member": "M001", "points": 30, "ref": "S1", "at": "2026-11-10T13:00:00+08:00"},
+    {"id": "BAD6", "type": "SPEND", "member": "M003", "points": 5, "at": "2026-11-11T09:00:00+08:00"}
+  ]
+}

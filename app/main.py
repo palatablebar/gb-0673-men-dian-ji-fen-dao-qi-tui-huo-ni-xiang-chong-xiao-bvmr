@@ -3,18 +3,21 @@ from importlib import import_module
 from fastapi import FastAPI, Request, Body
 from fastapi.responses import JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
-from app.config import ROOT, META, MODULES, DB_PATH
+from app.config import ROOT, META, MODULES, DB_PATH, COBRAND_DB
 from app.errors import BusinessError
 from app.engine import evaluate
 from app import store
 from app.archive import serialize
+from app.cobrand.handler import router as cobrand_router
 
 @asynccontextmanager
 async def lifespan(app):
     store.save(DB_PATH,evaluate())
     yield
 app=FastAPI(title=META['title'],lifespan=lifespan)
+app.state.cobrand_db=COBRAND_DB
 app.mount('/static',StaticFiles(directory=str(ROOT/'app/static')),name='static')
+app.include_router(cobrand_router)
 @app.exception_handler(BusinessError)
 async def business_error(request:Request,error:BusinessError):
     return JSONResponse({'code':error.code,'detail':error.message},status_code=error.status)

@@ -3,5 +3,5 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 DB_PATH=/data/workbench.sqlite TZ=Asia/Shanghai
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 DB_PATH=/data/workbench.sqlite COBRAND_DB=/data/cobrand.sqlite TZ=Asia/Shanghai
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

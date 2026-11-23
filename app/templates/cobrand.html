@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>联名积分出资结算</title>
+<link href="/static/cobrand.css" rel="stylesheet">
+<script src="/static/cobrand.js" defer></script>
+</head>
+<body data-settlement-id="{{ cb.manifest.settlement_id }}">
+<header class="cb-head">
+  <div>
+    <h1>联名积分与出资结算</h1>
+    <p>{{ cb.partners.brand }} × {{ cb.partners.mall }} ｜ 结算单 {{ cb.manifest.settlement_id }} ｜ 规则版本 {{ cb.manifest.rule_version }}</p>
+  </div>
+  <div class="cb-status" id="publish-status" data-revision="{{ cb.revision }}">
+    <span class="dot"></span><b>{{ cb.status }}</b>
+    {% if cb.published_at %}<small>发布于 {{ cb.published_at }}</small>{% endif %}
+  </div>
+</header>
+
+<main>
+  <section class="cb-cards">
+    {% for pool in cb.pools %}
+    <article class="cb-card">
+      <h2>{{ cb.partners[pool.pool] }}预算结余</h2>
+      <strong>{{ pool.remaining }}</strong>
+      <small>预算 {{ pool.budget }} ｜ 净支出 {{ pool.net_spend }}</small>
+    </article>
+    {% endfor %}
+  </section>
+
+  <section class="cb-panel">
+    <div class="cb-panel__head"><h2>会员恢复额</h2><span>{{ cb.members|length }} 名会员</span></div>
+    <table>
+      <thead><tr><th>会员号</th><th>恢复额</th><th>当前可用积分</th></tr></thead>
+      <tbody>
+      {% for m in cb.members %}
+        <tr><td>{{ m.member }}</td><td class="num">{{ m.restored }}</td><td class="num">{{ m.available }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="cb-panel cb-actions">
+    <button id="rerun-btn" type="button">按不可变输入快照重算</button>
+    <button id="publish-btn" type="button">发布当前结算单</button>
+    <a id="export-link" href="/api/cobrand/export/{{ cb.manifest.settlement_id }}">下载结算证据包</a>
+    <output id="cb-result" aria-live="polite"></output>
+  </section>
+</main>
+<footer class="cb-foot">
+  <span id="cb-msg">同输入同规则版本生成同一结算号；重跑同一退款不重复占用预算；发布失败保留旧版。</span>
+  <a href="/intake">返回积分批次账</a>
+</footer>
+</body>
+</html>
